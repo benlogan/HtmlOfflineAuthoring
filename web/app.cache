@@ -1,6 +1,8 @@
 CACHE MANIFEST
 # v1 2011-08-14
 images/ubs.png
+styles/styles.css
+index.html
 
 NETWORK:
 *

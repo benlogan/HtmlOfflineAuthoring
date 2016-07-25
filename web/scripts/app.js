@@ -112,6 +112,11 @@ function updateStatus(message) {
 }
 
 function updateTodo() {
+    // if we are offline, we can't rely on server side sorting of the array!
+    _todoItems.sort(function(a, b) {
+        return parseFloat(b.stamp) - parseFloat(a.stamp);
+    });
+    
     var todoList = $('#todo-list');
     var ul = $('<ul>');
     todoList.empty();
