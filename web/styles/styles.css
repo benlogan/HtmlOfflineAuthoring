@@ -1,0 +1,51 @@
+body 
+{
+    font-family: "Helvetica";
+}
+@media (min-width: 320px) 
+{
+    body
+    {
+        width: 450px;
+        margin: 0 auto;
+        padding: 5px;
+    }
+}
+@media (max-width: 320px) 
+{
+    .navbar
+    {
+        display:none;
+    }
+    .statusText 
+    {
+        color: #ff0000;
+    }
+}
+.statusText 
+{
+    display: block;
+    padding: 10px;
+    font-size: 12px;
+}
+.option-block
+{
+    padding: 10px;
+}
+#data-table
+{
+    margin: 10px 0;
+    width: 100%;
+    border: groove;
+    border-width: 2px;
+}
+.notes
+{
+    display: block;
+    padding: 10px;
+    text-decoration: underline;
+}
+#authorPanel
+{
+    width: 100%;
+}

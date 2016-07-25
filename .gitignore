@@ -1,0 +1,11 @@
+.tmp
+dist
+node_modules
+pages
+
+logs
+results
+*.sublime-*
+npm-debug.log
+.idea/
+*.iml

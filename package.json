@@ -1,0 +1,17 @@
+{
+  "name": "mobile-author-poc",
+  "version": "0.0.15",
+  "description": "Research Mobile Authoring PoC",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\""
+  },
+  "devDependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "lodash": "^4.11.1",
+    "node-env-scripts": "0.2.6",
+    "js-base64": "2.1.9"
+  },
+  "license": "UBS-Internal"
+}

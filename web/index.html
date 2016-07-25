@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" manifest="app.cache">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Research Mobile Authoring PoC</title>
+        <script src="libs/jquery.js"></script>
+        <script src="libs/moment.js"></script>
+        <script src="libs/base64.js"></script>
+        <script src="./scripts/app.js"></script>
+        <link rel="stylesheet" type="text/css" href="styles/styles.css">
+    </head>
+    <body>
+        <img src="images/ubs.png">
+        
+        <h2>Author a Note</h2>
+        <div id='authorPanel'>
+            <input id="task-text" type="text" style="width: 100%;">
+        </div>
+        <div id='controlPanel'>
+            <!--<span class="option-block">-->
+            <button id="add-button">Publish</button>
+            <button id="clean-local">Clear Local Storage</button>
+            <!--</span>-->
+        </div>
+        
+        <h2>Your Notes</h2>
+        <div id="data-table">
+            <div id="todo-list"></div>
+        </div>
+        <span id="status" class="statusText">&nbsp;</span>
+        <!--<h3 id='NetworkStatusLabel'>Online</h3>-->
+    </body>
+</html>
