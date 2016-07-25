@@ -9,6 +9,14 @@
         <script src="libs/base64.js"></script>
         <script src="./scripts/app.js"></script>
         <link rel="stylesheet" type="text/css" href="styles/styles.css">
+        <script>
+            $(document).ready(function(){
+                $('#authorPanel').keypress(function(e){
+                    if(e.keyCode==13)
+                    $('#add-button').click();
+                });
+            });
+        </script>
     </head>
     <body>
         <img src="images/ubs.png">

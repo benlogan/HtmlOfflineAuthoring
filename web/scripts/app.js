@@ -1,10 +1,16 @@
 var _todoItems = [];
 var statusMessage = ' ';
+
 $.ajaxSetup({ cache: false });
 $(function () {
     $('#add-button').on('click', function (event) {
+        // retrieve the text
         var newText = $('#task-text').val();
+
+        // blank the text box
         $('#task-text').val('');
+
+        // trim text and ensure its not empty
         if ($.trim(newText) !== '') {
             console.log('Add item : ' + $('#task-text').val());
             statusMessage = "Added: " + newText;
@@ -21,9 +27,9 @@ $(function () {
     $(window).bind('online offline', function (e) {
         if (window.navigator.onLine) {
             syncDataWithServer();
-            updateStatus("Network is back/online.");
+            updateStatus("Network Status : Online.");
         } else {
-            updateStatus("Network went offline, data will be saved to cache.");
+            updateStatus("Network Status : Offline (data will be cached locally).");
         }
     });
     getDataFromServer();
@@ -47,18 +53,6 @@ function getDataFromServer() {
         }
         updateUI();
     });
-}
-
-function isStorageEmpty() {
-    return getStorageValue().length == 0;
-}
-
-function getStorageValue() {
-    var result = [];
-    if (localStorage.getItem('todos') !== null) {
-        result = JSON.parse(localStorage.getItem('todos')).items || [];
-    }
-    return result;
 }
 
 function syncDataWithServer() {
@@ -97,6 +91,18 @@ function updateUI() {
     updateTodo();
     updateStatus(statusMessage);
     $('#clean-local').prop('disabled', isStorageEmpty());
+}
+
+function isStorageEmpty() {
+    return getStorageValue().length == 0;
+}
+
+function getStorageValue() {
+    var result = [];
+    if (localStorage.getItem('todos') !== null) {
+        result = JSON.parse(localStorage.getItem('todos')).items || [];
+    }
+    return result;
 }
 
 function updateStatus(message) {

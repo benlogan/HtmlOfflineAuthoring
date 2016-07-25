@@ -36,8 +36,12 @@ app.get('/api/todos/delete', function (request, response) {
 });
 
 app.get('/api/todos/get', function (request, response) {
-    //response.json({items: todoItems});
-    response.json({items: todoItems.reverse()});
+    // sort by created date - most recent first
+    todoItems.sort(function(a, b) {
+        return parseFloat(b.stamp) - parseFloat(a.stamp);
+    });
+
+    response.json({items: todoItems});
 });
 
 app.listen(httpPort, function () {
