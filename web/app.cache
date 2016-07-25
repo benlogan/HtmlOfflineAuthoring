@@ -2,6 +2,10 @@ CACHE MANIFEST
 # v1 2011-08-14
 images/ubs.png
 styles/styles.css
+scripts/app.js
+libs/base64.js
+libs/jquery.js
+libs/moment.js
 index.html
 
 NETWORK:
