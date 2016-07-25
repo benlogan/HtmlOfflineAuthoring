@@ -3,7 +3,10 @@ var bodyParser = require('body-parser');
 var Base64 = require('js-base64').Base64;
 var _ = require('lodash');
 var app = new express();
-var httpPort = 19082;
+
+// process.env.PORT lets the port be set by Heroku
+var httpPort = process.env.PORT || 19082;
+
 // parse application/x-www-form-urlencoded
 //app.use(bodyParser.urlencoded({ extended: false }));
 // parse various different custom JSON types as JSON
