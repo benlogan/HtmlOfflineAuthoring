@@ -1,5 +1,5 @@
 var _todoItems = [];
-var statusMessage = ' ';
+//var statusMessage = ' ';
 
 $.ajaxSetup({ cache: false });
 $(function () {
@@ -12,24 +12,23 @@ $(function () {
 
         // trim text and ensure its not empty
         if ($.trim(newText) !== '') {
-            console.log('Add item : ' + $('#task-text').val());
-            statusMessage = "Added: " + newText;
+            console.log('About to process text : ' + newText);
             _todoItems.push({task: newText, stamp: moment.utc(new Date()).toDate().getTime()});
             syncDataWithServer();
         }
         $('#task-text').focus();
     });
     $('#clean-local').on('click', function (event) {
-        statusMessage = 'Local Storage Deleted.';
+        updateStatus("Local Storage Deleted");
         localStorage.removeItem('todos');
         updateUI();
     });
     $(window).bind('online offline', function (e) {
         if (window.navigator.onLine) {
             syncDataWithServer();
-            updateStatus("Network Status : Online.");
+            updateStatus("Network Status : Online");
         } else {
-            updateStatus("Network Status : Offline (data will be cached locally).");
+            updateStatus("Network Status : Offline (data will be cached locally)");
         }
     });
     getDataFromServer();
@@ -44,12 +43,12 @@ function getDataFromServer() {
             saveLocally(_todoItems);
         }
     }).always(function (jqXHR, textStatus) {
-        console.log('get always/finally block, status ', textStatus);
+        console.log('GET always/finally block, status?', textStatus);
         if (textStatus === 'error') {
-            statusMessage = 'Getting Cached Data as sever seems down';
+            updateStatus("Data Source : Cache");
             _todoItems = getStorageValue();
         } else {
-            statusMessage = "Data loaded from server";
+            updateStatus("Data Source : Server");
         }
         updateUI();
     });
@@ -57,39 +56,42 @@ function getDataFromServer() {
 
 function syncDataWithServer() {
     var dataAsString = JSON.stringify({items: _todoItems});
-    console.log("Sending to Server..", dataAsString);
+    console.log("Sending data to server", dataAsString);
     $.ajax({
         url: "api/todos/save",
         type: "GET",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         success: function (msg) {
-            statusMessage = "Save to server: " + msg;
+            console.log("Save to server response?", msg);
             getDataFromServer();
         },
         data: "data=" + Base64.encode(dataAsString)
     }).always(function (jqXHR, textStatus) {
-        console.log('Save always/finally block, status ', textStatus);
+        console.log('Save always/finally block, status?', textStatus);
         if (textStatus === 'error') {
-            statusMessage = "You can work offline & reload page as well. \n Data will be saved to server automatically once online.";
-            $('#save-to-server').prop('disabled', false);
+            updateStatus("You can work offline & reload page as well. \n Data will be saved to server automatically once online.");
+            //$('#save-to-server').prop('disabled', false);
         } else {
-            statusMessage = "Saved to server";
-            $('#save-to-server').prop('disabled', true);
+            console.log("Saved to server successfully!");
+            // no good loggin to the UI here, it will be overwritten
+            //$('#save-to-server').prop('disabled', true);
         }
-        saveLocally(_todoItems);//Always save to local cache
+        // always save to local cache
+        // both of these calls will be duplicated for a succesful online call, by the subsequent get/refresh
+        saveLocally(_todoItems); 
         updateUI();
     });
 }
 
 function saveLocally(itemList) {
-    console.log("Saving locally..");
+    console.log("Saving to local storage...");
     localStorage.setItem("todos", JSON.stringify({items: itemList}));
 }
 
 function updateUI() {
     updateTodo();
-    updateStatus(statusMessage);
+    //updateStatus(statusMessage);
     $('#clean-local').prop('disabled', isStorageEmpty());
 }
 

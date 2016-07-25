@@ -17,10 +17,16 @@ app.use(express.static(__dirname + '/web'));
 
 var todoItems = [];
 
+app.listen(httpPort, function () {
+    console.log("Listening on " + httpPort);
+});
+
+/*
 app.get('/ping', function (request, response) {
     console.log('ping....');
     response.json({online: true});
 });
+*/
 
 app.get('/api/todos/save', function (request, response) {
     var decodedData = Base64.decode(request.query.data);
@@ -28,11 +34,6 @@ app.get('/api/todos/save', function (request, response) {
     var jsonData = JSON.parse(decodedData);
     todoItems = mergeAndSortOnTimeStamp(todoItems, jsonData.items  ? jsonData.items : []);
     response.json('saved');
-});
-
-app.get('/api/todos/delete', function (request, response) {
-    todoItems = [];
-    response.json('all todo is deleted');
 });
 
 app.get('/api/todos/get', function (request, response) {
@@ -44,9 +45,12 @@ app.get('/api/todos/get', function (request, response) {
     response.json({items: todoItems});
 });
 
-app.listen(httpPort, function () {
-    console.log("Listening on " + httpPort);
+/*
+app.get('/api/todos/delete', function (request, response) {
+    todoItems = [];
+    response.json('all todo is deleted');
 });
+*/
 
 function mergeAndSortOnTimeStamp(serverItems, requestItems) {
     var merged = _.uniqBy(_.concat(serverItems, requestItems), 'stamp');

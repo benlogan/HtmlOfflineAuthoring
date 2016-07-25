@@ -7,7 +7,7 @@ PoC to demonstrate the use of [HTML App Cache](http://www.w3schools.com/html/htm
 This PoC also use browser's [localStorage] (https://developer.mozilla.org/en/docs/Web/API/Window/localStorage) feature to save data during offline mode. The data is synchronize automatically when the browser comes online again.
 
 Demo;
-
+https://html-offline-authoring.herokuapp.com
 
 ## HTML App Cache
 
@@ -55,6 +55,8 @@ Enabling Cache & offline mode
 # Dev Notes
 
 Start/Stop/Deploy?
+
+Now on Heroku!
 
 # Start locally
 
