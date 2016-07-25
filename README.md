@@ -1,19 +1,19 @@
- [![Build Status](https://flow-teamcity4.ubs.net/app/rest/builds/buildType:%28id:UbsNeo_Research_MobileAuthorPoc_Release%29/statusIcon)](https://flow-teamcity4.ubs.net/project.html?projectId=UbsNeo_Research_MobileAuthorPoc)
-
 ======================
-mobile-author-poc
+HTML Offline Authoring
 ======================
 
-POC to demonstrate use of [HTML App Cache](http://www.w3schools.com/html/html5_app_cache.asp) & how to we can leverage it to use in an offline mode. All modern web browsers supports HTML App Cache which allows to load the page using the cached resources. This is useful for mobile application where devices frequently goes out of internet connection.
+PoC to demonstrate the use of [HTML App Cache](http://www.w3schools.com/html/html5_app_cache.asp) & how we can use that, or other HTML5 features, to support authoring content in an offline mode. All modern web browsers supports HTML App Cache which allows to load the page using the cached resources. This is useful for mobile application where devices frequently lose internet connection.
 
-This POC also use browser's [localStorage] (https://developer.mozilla.org/en/docs/Web/API/Window/localStorage) feature to save data during offline mode. The data is synchronize automatically when the browser comes online again.
+This PoC also use browser's [localStorage] (https://developer.mozilla.org/en/docs/Web/API/Window/localStorage) feature to save data during offline mode. The data is synchronize automatically when the browser comes online again.
 
-Dev1 - http://xldn4157vdap.ldn.swissbank.com:19082/index.html
+Demo;
+
 
 ## HTML App Cache
 
 ### Online Behaviour
-If the page is loaded from the first time all the HTML resources (js,css) will be loaded from server. All the resources mentioned in [cache manifest](https://github.ldn.swissbank.com/Research/mobile-author-poc/blob/master/web/app.cache) CACHE section will be cached by the browser. In subsequent reload of pages cached resources will be used. This behaviour will continue until the cache manifest is updated or browser cache is cleard manually. Cached resources have http-status 304.
+
+If the page is loaded from the first time all the HTML resources (js,css) will be loaded from server. All the resources mentioned in [cache manifest](web/app.cache) CACHE section will be cached by the browser. In subsequent reload of pages cached resources will be used. This behaviour will continue until the cache manifest is updated or browser cache is cleard manually. Cached resources have http-status 304.
 
 e.g.
 ````
@@ -26,7 +26,7 @@ images/ubs.png
 
 ### Offline Behaviour
 
-If the page is loaded once & browser went  offline due to some reason. You can still refresh the page. But this time all the resource mentioned in [cache manifest](https://github.ldn.swissbank.com/Research/mobile-author-poc/blob/master/web/app.cache) will be loaded from the browser cache. Also data will be retrieved from local stroage instead of remote server.  Application always try to send/retrive the data remotely. But browser is offline it will save data (in this case a simple list of comments)
+If the page is loaded once & browser went offline due to some reason. You can still refresh the page. But this time all the resource mentioned in [cache manifest](web/app.cache) will be loaded from the browser cache. Also data will be retrieved from local stroage instead of remote server.  Application always try to send/retrive the data remotely. But browser is offline it will save data (in this case a simple list of comments)
 
 
 # Demo
@@ -54,9 +54,10 @@ Enabling Cache & offline mode
 
 # Dev Notes
 
-Start/Stop/Deploy using [UBS Deploy](https://deploy.ubs.net/Neo/status?artifact=mobile-author-poc&environment=dev1&host=xldn4157vdap&dir=true)
+Start/Stop/Deploy?
 
 # Start locally
-  npm install
+
+npm install
   
-  node server
+node server
