@@ -25,8 +25,10 @@ $(function () {
     });
     $(window).bind('online offline', function (e) {
         if (window.navigator.onLine) {
-            syncDataWithServer();
+            // FIXME we might have to repopulate in memory data from local storage, in some scenarios?
             updateStatus("Network Status : Online");
+            // an immediate call seems to stump Chrome and result in a ERR_NETWORK_CHANGED error
+            setTimeout(syncDataWithServer, 1000);
         } else {
             updateStatus("Network Status : Offline (data will be cached locally)");
         }
@@ -116,7 +118,7 @@ function updateTodo() {
     _todoItems.sort(function(a, b) {
         return parseFloat(b.stamp) - parseFloat(a.stamp);
     });
-    
+
     var todoList = $('#todo-list');
     var ul = $('<ul>');
     todoList.empty();
